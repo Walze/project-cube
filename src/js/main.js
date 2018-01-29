@@ -15,21 +15,32 @@ const Colors = [
 
 const NavLinks = document.querySelectorAll('[rotate]')
 const Cube = document.querySelector('#cube')
-const Classes = {
-  front: 0,
-  back: -180,
-  right: -90,
-  left: 90,
-  top: -90,
-  bot: 90
+const SideWrappers = document.querySelectorAll('.side-wrapper')
+window.cube = Cube
+const SideWidth = Array.prototype.slice.call(SideWrappers).reduce((prev, current) =>
+  (prev.getBoundingClientRect().width > current.getBoundingClientRect().width) ? prev : current
+).getBoundingClientRect().width
+
+const SidesDeg = {
+  front: 'rotateY(0deg)',         /* Y */
+  right: 'rotateY(-90deg)',     /* Y */
+  left: 'rotateY(90deg)',     /* Y */
+  back: 'rotateX(-180deg)', /* X */
+  top: 'rotateX(-90deg)', /* X */
+  bot: 'rotateX(90deg)' /* X */
 }
 
 NavLinks.forEach(el => el.addEventListener('click', e => {
   e.preventDefault()
-  const side = el.getAttribute('rotate')
 
-  for (let classe in Classes) Cube.classList.remove(classe)
+  const Side = el.getAttribute('rotate')
+  Cube.style.transform = SidesDeg[Side]
 
-  Cube.classList.add(side)
+  const SideWrapper = document.querySelector(`#side-${Side}`)
+  SideWrapper.style.transform += 'translateZ(' + SideWidth / 2 + 'px)'
+
+  console.log()
 }))
+
+
 
