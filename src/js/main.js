@@ -1,10 +1,10 @@
-import '../css/cube.css'
-import '../css/main.css'
+const CSS = [
+  'cube',
+  'main',
+  'nav'
+]
+for (let file of CSS) require(`../css/${file}.css`)
 
-
-const NavLinks = document.querySelectorAll('[rotate]')
-const Cube = document.querySelector('#cube')
-const Classes = ['front', 'back', 'left', 'right', 'top', 'bot']
 const Colors = [
   '#4e4e56',
   '#da635d',
@@ -13,12 +13,22 @@ const Colors = [
   '#2C2C54'
 ]
 
+const NavLinks = document.querySelectorAll('[rotate]')
+const Cube = document.querySelector('#cube')
+const Classes = {
+  front: 0,
+  back: -180,
+  right: -90,
+  left: 90,
+  top: -90,
+  bot: 90
+}
 
 NavLinks.forEach(el => el.addEventListener('click', e => {
   e.preventDefault()
   const side = el.getAttribute('rotate')
 
-  for (let classe of Classes) Cube.classList.remove(classe)
+  for (let classe in Classes) Cube.classList.remove(classe)
 
   Cube.classList.add(side)
 }))
