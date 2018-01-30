@@ -1,3 +1,5 @@
+import { Cube } from './Cube'
+
 const CSS = [
   'cube',
   'main',
@@ -13,29 +15,9 @@ const Colors = [
   '#2C2C54'
 ]
 
-const Degrees = {
-  cube: {
-    front: 'rotateY(0deg)',         /* Y */
-    right: 'rotateY(-90deg)',     /* Y */
-    left: 'rotateY(90deg)',     /* Y */
-    back: 'rotateX(-180deg)', /* X */
-    top: 'rotateX(-90deg)', /* X */
-    bot: 'rotateX(90deg)' /* X */
-  },
-  sides: {
-    front: 'rotateY(0deg)',          /* Y */
-    right: 'rotateY(90deg)',       /* Y */
-    left: 'rotateY(-90deg)',     /* Y */
-    back: 'rotateX(180deg)',   /* X */
-    top: 'rotateX(90deg)',   /* X */
-    bot: 'rotateX(-90deg)' /* X */
-  }
-}
-
 const NavLinks = document.querySelectorAll('[rotate]')
-const CubeWrapper = document.querySelector('#wrapper')
-const Cube = document.querySelector('#cube')
-
+const RotateeWrapper = document.querySelector('#wrapper')
+const Rotatee = document.querySelector('#cube')
 const Sides = document.querySelectorAll('.side-wrapper .side')
 
 const SideWidth = Array.prototype.slice.call(Sides).reduce((prev, current) =>
@@ -46,17 +28,9 @@ const SideHeight = Array.prototype.slice.call(Sides).reduce((prev, current) =>
   (prev.getBoundingClientRect().height > current.getBoundingClientRect().height) ? prev : current
 ).getBoundingClientRect().height
 
-CubeWrapper.style.height = SideHeight + 'px'
-
-NavLinks.forEach(el => el.addEventListener('click', e => {
-  e.preventDefault()
-
-  const SideString = el.getAttribute('rotate')
-  Cube.style.transform = Degrees.cube[SideString]
-
-  const SideEl = document.querySelector(`#side-${SideString} .side`)
-  CubeWrapper.style.height = SideEl.clientHeight + 'px'
-}))
+RotateeWrapper.style.height = SideHeight + 'px'
 
 
-
+const Rotator = new Cube(RotateeWrapper, Rotatee, NavLinks)
+Rotator.active = true
+Rotator.listenClicks()
