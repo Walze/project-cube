@@ -9,6 +9,7 @@
 
 html, body {
     overflow: hidden;
+    background: #222;
 }
 
 p,span {
