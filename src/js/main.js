@@ -20,15 +20,15 @@ const RotateeWrapper = document.querySelector('#wrapper')
 const Rotatee = document.querySelector('#cube')
 const Sides = document.querySelectorAll('.side-wrapper .side')
 
-const SideWidth = Array.prototype.slice.call(Sides).reduce((prev, current) =>
+const SideWidthMax = Array.prototype.slice.call(Sides).reduce((prev, current) =>
   (prev.getBoundingClientRect().width > current.getBoundingClientRect().width) ? prev : current
 ).getBoundingClientRect().width
 
-const SideHeight = Array.prototype.slice.call(Sides).reduce((prev, current) =>
+const SideHeightMax = Array.prototype.slice.call(Sides).reduce((prev, current) =>
   (prev.getBoundingClientRect().height > current.getBoundingClientRect().height) ? prev : current
 ).getBoundingClientRect().height
 
-RotateeWrapper.style.height = SideHeight + 'px'
+RotateeWrapper.style.height = SideHeightMax + 'px'
 
 
 const Rotator = new Cube(RotateeWrapper, Rotatee, NavLinks)
