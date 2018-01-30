@@ -1,11 +1,11 @@
 import { Cube } from './Cube'
+import { CSS } from './CSS'
 
-const CSS = [
+new CSS([
   'cube',
   'main',
   'nav'
-]
-for (let file of CSS) require(`../css/${file}.css`)
+])
 
 const Colors = [
   '#4e4e56',
@@ -31,6 +31,6 @@ const SideHeightMax = Array.prototype.slice.call(Sides).reduce((prev, current) =
 RotateeWrapper.style.height = SideHeightMax + 'px'
 
 
-const Rotator = new Cube(RotateeWrapper, Rotatee, NavLinks)
-Rotator.active = true
-Rotator.listenClicks()
+const Rotator1 = new Cube(RotateeWrapper, Rotatee, NavLinks)
+Rotator1.active = true
+Rotator1.listenClicks()
