@@ -18,13 +18,13 @@ const Colors = [
 const NavLinks = document.querySelectorAll('[rotate]')
 const RotateeWrapper = document.querySelector('#wrapper')
 const Rotatee = document.querySelector('#cube')
-const Sides = document.querySelectorAll('.side-wrapper .side')
+const Sides = Array.prototype.slice.call(document.querySelectorAll('.side-wrapper .side'))
 
-const SideWidthMax = Array.prototype.slice.call(Sides).reduce((prev, current) =>
+const SideWidthMax = Sides.reduce((prev, current) =>
   (prev.getBoundingClientRect().width > current.getBoundingClientRect().width) ? prev : current
 ).getBoundingClientRect().width
 
-const SideHeightMax = Array.prototype.slice.call(Sides).reduce((prev, current) =>
+const SideHeightMax = Sides.reduce((prev, current) =>
   (prev.getBoundingClientRect().height > current.getBoundingClientRect().height) ? prev : current
 ).getBoundingClientRect().height
 
