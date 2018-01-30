@@ -7,6 +7,10 @@
     position: relative;
 }
 
+html, body {
+    overflow: hidden;
+}
+
 p,span {
 }
 
