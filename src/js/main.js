@@ -33,23 +33,29 @@ const Degrees = {
 }
 
 const NavLinks = document.querySelectorAll('[rotate]')
+const CubeWrapper = document.querySelector('#wrapper')
 const Cube = document.querySelector('#cube')
-const SideWrappers = document.querySelectorAll('.side-wrapper')
 
-const SideWidth = Array.prototype.slice.call(SideWrappers).reduce((prev, current) =>
+const Sides = document.querySelectorAll('.side-wrapper .side')
+
+const SideWidth = Array.prototype.slice.call(Sides).reduce((prev, current) =>
   (prev.getBoundingClientRect().width > current.getBoundingClientRect().width) ? prev : current
 ).getBoundingClientRect().width
 
-const SideHeight = Array.prototype.slice.call(SideWrappers).reduce((prev, current) =>
+const SideHeight = Array.prototype.slice.call(Sides).reduce((prev, current) =>
   (prev.getBoundingClientRect().height > current.getBoundingClientRect().height) ? prev : current
 ).getBoundingClientRect().height
+
+CubeWrapper.style.height = SideHeight + 'px'
 
 NavLinks.forEach(el => el.addEventListener('click', e => {
   e.preventDefault()
 
-  const Side = el.getAttribute('rotate')
-  Cube.style.transform = Degrees.cube[Side]
+  const SideString = el.getAttribute('rotate')
+  Cube.style.transform = Degrees.cube[SideString]
 
+  const SideEl = document.querySelector(`#side-${SideString} .side`)
+  CubeWrapper.style.height = SideEl.clientHeight + 'px'
 }))
 
 
